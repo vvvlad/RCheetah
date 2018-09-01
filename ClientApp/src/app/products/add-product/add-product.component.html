@@ -1,0 +1,28 @@
+
+<section class="new-product" fxLayout fxLayoutAlign="center">
+    <mat-card fxFlex="400px" fxFlex.xs="100%">
+        <mat-card-title fxLayoutAligh="center">New Product</mat-card-title>
+        <mat-card-content fxLayoutAligh="center">
+            <mat-form-field>
+                <mat-select placeholder="Select something">
+                  <mat-option value="crunches">
+                    Crunches
+                  </mat-option>
+                  <mat-option value="touch-toes">
+                    Touch Toes
+                  </mat-option>
+                  <mat-option value="side-lunges">
+                    Side Lunges
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions fxLayoutAligh="center">
+          <button mat-button type="submit">Start</button>
+          <button mat-button type="submit" (click)="onCancel()">Cancel</button>
+        </mat-card-actions>
+      
+      </mat-card>
+</section>
+
+

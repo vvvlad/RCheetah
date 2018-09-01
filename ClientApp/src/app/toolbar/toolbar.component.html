@@ -1,0 +1,62 @@
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" [opened]="false" >
+    <mat-toolbar color="primary">Menu</mat-toolbar><!-- This is the title of the menu  -->
+    <mat-nav-list (click)="drawer.toggle()">
+      <a mat-list-item routerLink="/"><mat-icon class="icon-menu">home</mat-icon>Default</a>
+      <a mat-list-item routerLink="products"><mat-icon class="icon-menu">devices_other</mat-icon>Products</a>
+      <a mat-list-item routerLink="table"><mat-icon class="icon-menu">favorite</mat-icon>Example Table</a>
+      <mat-list-item>
+        <button mat-icon-button>
+            <mat-icon>power_settings_new</mat-icon>
+            Logout
+        </button>
+      </mat-list-item>
+      
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div class="proj-title"><a routerLink="/">ResearCheetah</a></div>
+      <!-- Filler to take the remaining space of the row -->
+      <span class="fill-remaining-space"></span>
+      <div *ngIf="!isAuth"> 
+        <ul fxLayout class="navigation-items">
+          <li>
+            <a routerLink="/login">
+              <!-- <mat-icon class="icon-menu">input</mat-icon> -->
+              <span>Login</span>
+            </a>
+          </li>
+          /
+          <li>
+            <a routerLink="/signup">
+              <!-- <mat-icon class="icon-menu">face</mat-icon> -->
+              <span>Signup</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="isAuth">
+          <ul fxLayout class="navigation-items">
+            <li>
+              <a style="cursor: pointer" (click)="onLogout()">
+                <!-- <mat-icon class="icon-menu">input</mat-icon> -->
+                <span>Logout</span>
+              </a>
+            </li>
+            </ul>
+        </div>
+      <!-- <mat-icon class="icon-toolbar">favorite</mat-icon> -->
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<!-- [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+[mode]="(isHandset$ | async) ? 'over' : 'side'"
+[opened]="!(isHandset$ | async)" -->
