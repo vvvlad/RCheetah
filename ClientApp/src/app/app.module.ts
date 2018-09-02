@@ -20,6 +20,8 @@ import { AddProductDialogComponent } from './products/add-product/add-product-di
 import { AuthService } from './auth/auth.service';
 import { ProductsService } from './products/products.service';
 import { AllProductsComponent } from './products/all-products/all-products.component';
+import { WebapitestComponent } from './examples/webapitest/webapitest.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { AllProductsComponent } from './products/all-products/all-products.compo
     AddProductComponent,
     ProductDetailsComponent,
     AddProductDialogComponent,
-    AllProductsComponent
+    AllProductsComponent,
+    WebapitestComponent,
+    WebapitestComponent
   ],
   imports: [
     MaterialModule,
@@ -43,7 +47,8 @@ import { AllProductsComponent } from './products/all-products/all-products.compo
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   exports: [
   ],
