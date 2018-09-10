@@ -22,7 +22,7 @@ import { ProductsService } from './products/products.service';
 import { AllProductsComponent } from './products/all-products/all-products.component';
 import { WebapitestComponent } from './examples/webapitest/webapitest.component';
 import { HttpClientModule } from '@angular/common/http';
-import { WebService } from './web.service';
+import { ErrorInterceptorProvider } from './_services/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { WebService } from './web.service';
   ],
   exports: [
   ],
-  providers: [AuthService, ProductsService, WebService],
+  providers: [AuthService, ProductsService, ErrorInterceptorProvider],
   bootstrap: [AppComponent],
   entryComponents: [AddProductDialogComponent]
 })

@@ -29,7 +29,7 @@ export class AuthService {
                 console.log('logged in OK');
                 this.authOk();
             }, error => {
-                console.log('Failed to login');
+                console.log(error);
         });
 
     }
