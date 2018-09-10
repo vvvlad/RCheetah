@@ -4,3 +4,7 @@ export interface AuthData {
     password: string;
 }
 
+export interface Token {
+    
+    token: string;
+}
