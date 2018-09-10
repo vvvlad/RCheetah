@@ -22,7 +22,6 @@ import { ProductsService } from './products/products.service';
 import { AllProductsComponent } from './products/all-products/all-products.component';
 import { WebapitestComponent } from './examples/webapitest/webapitest.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MessagesComponent } from './messages/messages.component';
 import { WebService } from './web.service';
 
 @NgModule({
@@ -40,8 +39,7 @@ import { WebService } from './web.service';
     AddProductDialogComponent,
     AllProductsComponent,
     WebapitestComponent,
-    WebapitestComponent,
-    MessagesComponent
+    WebapitestComponent
   ],
   imports: [
     MaterialModule,

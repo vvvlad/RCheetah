@@ -9,7 +9,6 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ProductsComponent } from './products/products.component';
 import { AuthGuard } from './auth/auth.guard';
 import { WebapitestComponent } from './examples/webapitest/webapitest.component';
-import { MessagesComponent } from './messages/messages.component';
 
 const routes: Routes = [
     { path: '', component: WelcomeComponent}, // empty part is the root route
@@ -18,7 +17,6 @@ const routes: Routes = [
     { path: 'signup', component: SignupComponent},
     { path: 'login', component: LoginComponent},
     { path: 'testcore', component: WebapitestComponent},
-    { path: 'messages', component: MessagesComponent},
     // { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]} return this to enable the guard on products routing
     { path: 'products', component: ProductsComponent}
 ];

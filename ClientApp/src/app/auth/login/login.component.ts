@@ -18,14 +18,13 @@ export class LoginComponent implements OnInit {
       loginPassword: new FormControl('', {validators: [Validators.required]})
     });
   }
-
+// TODO - make email login on the server, instead of username
   onSubmit() {
     console.log(this.loginForm);
     this.authService.login({
-      email: this.loginForm.value.loginEmail,
+      userName: this.loginForm.value.loginEmail,
       password: this.loginForm.value.loginPassword
     });
-
   }
 
 }
