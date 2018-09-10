@@ -1,10 +1,12 @@
+import {Component} from '@angular/core';
 import { User } from './user.model';
 import { AuthData, Token } from './auth-data.model';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +14,7 @@ export class AuthService {
     authChange = new Subject<boolean>();
     base_url = 'https://localhost:44389/auth/';
 
-    constructor(private router: Router, private http: HttpClient) { }
+    constructor(private router: Router, private http: HttpClient, private snack: MatSnackBar) { }
 
 
     login(model: any) {
@@ -26,10 +28,14 @@ export class AuthService {
         )
          .subscribe(
             next => {
-                console.log('logged in OK');
+                const snackRef = this.snack.open('Success', 'User logged in', {duration: 4000, panelClass: ['snack-bar-color-ok']});
+                snackRef.onAction().subscribe(() => {
+                    console.log('clicked on action');
+                });
+
                 this.authOk();
             }, error => {
-                console.log(error);
+                this.snack.open('Failure login', error, {duration: 4000});
         });
 
     }

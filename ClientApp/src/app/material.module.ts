@@ -19,7 +19,8 @@ import {
     MatTabsModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   } from '@angular/material';
   import { LayoutModule } from '@angular/cdk/layout';
 
@@ -47,7 +48,8 @@ import {
         MatProgressSpinnerModule,
         MatDialogModule,
         MatSortModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatSnackBarModule
     ],
     exports: [
         MatButtonModule,
@@ -72,7 +74,8 @@ import {
         MatProgressSpinnerModule,
         MatDialogModule,
         MatSortModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatSnackBarModule
     ]
 })
 export class MaterialModule {}
