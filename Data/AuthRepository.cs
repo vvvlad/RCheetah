@@ -15,9 +15,9 @@ namespace RCheetah.Data
         {
             _context = context;
         }
-        public async Task<User> Login(string userName, string password)
+        public async Task<User> Login(string email, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName); //will return null if user not found
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email); //will return null if user not found
 
             if (user == null)
                 return null;
@@ -68,9 +68,9 @@ namespace RCheetah.Data
             }
         }
 
-        public async Task<bool> UserExists(string userName)
+        public async Task<bool> UserExists(string email)
         {
-            if (await _context.Users.AnyAsync(x => x.UserName == userName))
+            if (await _context.Users.AnyAsync(x => x.Email == email))
                 return true;
             return false;
         }

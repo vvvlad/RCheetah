@@ -12,13 +12,14 @@ import { WebapitestComponent } from './examples/webapitest/webapitest.component'
 
 const routes: Routes = [
     { path: '', component: WelcomeComponent}, // empty part is the root route
-    { path: 'table', component: ExampleTableComponent},
+    { path: 'table', component: ExampleTableComponent, canActivate: [AuthGuard]},
     { path: 'dash', component: ExampleDashboardComponent},
     { path: 'signup', component: SignupComponent},
     { path: 'login', component: LoginComponent},
-    { path: 'testcore', component: WebapitestComponent},
-    // { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]} return this to enable the guard on products routing
-    { path: 'products', component: ProductsComponent}
+    { path: 'testcore', component: WebapitestComponent, canActivate: [AuthGuard]},
+    { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]}, // return this to enable the guard on products routing
+    // { path: 'products', component: ProductsComponent},
+    { path: '**', redirectTo: 'login', pathMatch: 'full'} // as long as the domain is ok, even if path doesn't exist, just redirect home
 ];
 
 @NgModule({

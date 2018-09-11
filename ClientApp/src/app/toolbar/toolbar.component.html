@@ -7,12 +7,6 @@
       <a mat-list-item routerLink="products"><mat-icon class="icon-menu">devices_other</mat-icon>Products</a>
       <a mat-list-item routerLink="table"><mat-icon class="icon-menu">favorite</mat-icon>Example Table</a>
       <a mat-list-item routerLink="testcore"><mat-icon class="icon-menu">ball</mat-icon>Test Core</a>
-      <mat-list-item>
-        <button mat-icon-button>
-            <mat-icon>power_settings_new</mat-icon>
-            Logout
-        </button>
-      </mat-list-item>
       
     </mat-nav-list>
   </mat-sidenav>
@@ -44,14 +38,27 @@
       <div *ngIf="isAuth">
           <ul fxLayout class="navigation-items">
             <li>
-              <a style="cursor: pointer" (click)="onLogout()">
-                <!-- <mat-icon class="icon-menu">input</mat-icon> -->
-                <span>Logout</span>
-              </a>
+           
+                <span>Welcome</span>
+                <span style="margin-left: 10px">{{authService.decodedToken?.unique_name | lowercase }}</span>
+                <!-- TODO - make the icon higher related to the text -->
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>expand_more</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>person</mat-icon>
+                    <span>Edit Profile</span>
+                  </button>
+                  <button mat-menu-item (click)="onLogout()">
+                    <mat-icon>power_settings_new</mat-icon>
+                    <span>Logout</span>
+                  </button>
+                </mat-menu>
             </li>
             </ul>
         </div>
-      <!-- <mat-icon class="icon-toolbar">favorite</mat-icon> -->
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

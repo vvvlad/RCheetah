@@ -13,6 +13,12 @@ namespace RCheetah.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>()
+                 .HasIndex(u => u.Email)
+                 .IsUnique();
+        }
         public DbSet<Value> Values { get; set; }
         public DbSet<User> Users { get; set; }
     }

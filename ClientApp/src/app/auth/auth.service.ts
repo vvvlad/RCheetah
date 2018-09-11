@@ -1,5 +1,3 @@
-import {Component} from '@angular/core';
-import { User } from './user.model';
 import { AuthData, Token } from './auth-data.model';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,12 +5,15 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthService {
-    private user: User;
     authChange = new Subject<boolean>();
     base_url = 'https://localhost:44389/auth/';
+
+    jwtHelper = new JwtHelperService();
+    decodedToken: any;
 
     constructor(private router: Router, private http: HttpClient, private snack: MatSnackBar) { }
 
@@ -23,6 +24,8 @@ export class AuthService {
                 const user = response;
                 if (user) {
                     localStorage.setItem('token', user.token);
+                    this.decodedToken = this.jwtHelper.decodeToken(user.token);
+                    console.log(this.decodedToken);
                 }
             })
         )
@@ -42,11 +45,12 @@ export class AuthService {
 
     loggedIn() {
         const token = localStorage.getItem('token');
-        return !!token;
+        return !this.jwtHelper.isTokenExpired(token); // using the auth0 jwt token service
     }
 
     logout() {
         localStorage.removeItem('token');
+        this.authChange.next(false);
         this.router.navigate(['/login']);
     }
 
@@ -57,7 +61,7 @@ export class AuthService {
 
                 this.authOk();
             }, error => {
-                console.log('register to login' + error);
+                console.log('register to login ' + error);
         });
     }
 
@@ -65,13 +69,13 @@ export class AuthService {
 
 
 // Linda tutorial auth function
-    register1(user) {
-        // this deletes a property from the user object
-        delete user.confirmPassword;
-        this.http.post<Token>(this.base_url + '/register', user).subscribe(res => {
-            localStorage.setItem('token', res.token);
-        });
-    }
+    // register1(user) {
+    //     // this deletes a property from the user object
+    //     delete user.confirmPassword;
+    //     this.http.post<Token>(this.base_url + '/register', user).subscribe(res => {
+    //         localStorage.setItem('token', res.token);
+    //     });
+    // }
 
 
 
@@ -87,19 +91,19 @@ export class AuthService {
     // }
 
 
-    logout1() {
-        this.user = null;
-        this.authChange.next(false);
-        this.router.navigate(['/login']);
-    }
+    // logout1() {
+    //     this.user = null;
+    //     this.authChange.next(false);
+    //     this.router.navigate(['/login']);
+    // }
 
-    getUser() {
-        return {...this.user };
-    }
+    // getUser() {
+    //     return {...this.user };
+    // }
 
-    isAuth() {
-        return this.user != null;
-    }
+    // isAuth() {
+    //     return this.user != null;
+    // }
 
     private authOk() {
         this.authChange.next(true);

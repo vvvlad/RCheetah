@@ -33,15 +33,15 @@ namespace RCheetah.Controllers
         {
             //TODO validate request 
 
-            user.UserName = user.UserName.ToLower();
-            if(await _repo.UserExists(user.UserName))
+            user.Email = user.Email.ToLower();
+            if(await _repo.UserExists(user.Email))
             {
-                return BadRequest("username already exists");
+                return BadRequest("Email already exists");
             }
 
             var userToCreate = new User
             {
-                UserName = user.UserName
+                Email = user.Email
             };
 
             var createdUser = await _repo.Register(userToCreate, user.Password);
@@ -52,9 +52,7 @@ namespace RCheetah.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login (UserForLoginDto user)
         {
-
-
-            var userFromRepo = await _repo.Login(user.UserName.ToLower(), user.Password);
+            var userFromRepo = await _repo.Login(user.Email.ToLower(), user.Password);
 
             if(userFromRepo==null)
             {
@@ -64,7 +62,8 @@ namespace RCheetah.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.UserName.ToString())
+                new Claim(ClaimTypes.Name, userFromRepo.UserName.ToString()),
+                new Claim(ClaimTypes.Email, userFromRepo.Email.ToString())
             };
             //Signing key
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));

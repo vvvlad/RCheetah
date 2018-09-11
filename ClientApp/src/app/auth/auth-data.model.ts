@@ -5,6 +5,5 @@ export interface AuthData {
 }
 
 export interface Token {
-    
     token: string;
 }

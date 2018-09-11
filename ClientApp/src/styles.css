@@ -10,6 +10,12 @@ body {
 }
 
 .snack-bar-color-ok {
-    background-color: #00ff7f;
-    color: orange;
+    /* background-color: #00ff7f; */
+    color: green;
+}  
+
+.snack-bar-color-error {
+    /* background-color: #00ff7f; */
+    color: red;
+    font-weight: bold;
 }  

@@ -10,7 +10,7 @@ namespace RCheetah.Dtos
     public class UserForRegisterDto
     {
         [Required]
-        public string UserName { get; set; }
+        public string Email { get; set; }
         [Required]
         [StringLength(8, MinimumLength =6, ErrorMessage ="Password needs to be at least 6 characters")]
         public string Password { get; set; }

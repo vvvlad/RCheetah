@@ -9,6 +9,8 @@ appsettings.json
 *.user
 *.userosscache
 *.sln.docstates
+*.db
+MySqliteDb.db
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -232,3 +234,4 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+MySqliteDb.db
