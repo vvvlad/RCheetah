@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// Material imports
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -38,7 +38,6 @@ import { ErrorInterceptorProvider } from './_services/error-interceptor.service'
     ProductDetailsComponent,
     AddProductDialogComponent,
     AllProductsComponent,
-    WebapitestComponent,
     WebapitestComponent
   ],
   imports: [
