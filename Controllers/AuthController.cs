@@ -62,6 +62,7 @@ namespace RCheetah.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
+                // user needs to be there, without it fails
                 new Claim(ClaimTypes.Name, userFromRepo.UserName.ToString()),
                 new Claim(ClaimTypes.Email, userFromRepo.Email.ToString())
             };
