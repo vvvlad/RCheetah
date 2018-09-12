@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'testcore', component: WebapitestComponent, canActivate: [AuthGuard]},
     { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]}, // return this to enable the guard on products routing
     // { path: 'products', component: ProductsComponent},
-    { path: '**', redirectTo: 'login', pathMatch: 'full'} // as long as the domain is ok, even if path doesn't exist, just redirect home
+    { path: '**', redirectTo: '', pathMatch: 'full'} // as long as the domain is ok, even if path doesn't exist, just redirect home
 ];
 
 @NgModule({
