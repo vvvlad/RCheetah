@@ -1,0 +1,92 @@
+[
+  {
+    "FirstName": "Rosa",
+    "LastName": "Crosby",
+    "Username": "Rosa_Crosby",
+    "Email": "waltersneal@cormoran.com",
+    "DateOfBirth": "1973-05-07",
+    "Password": "password",
+    "Created": "2017-07-10",
+    "LastActive": "2017-07-10",
+    "Country": "Botswana",
+    "Photos": [
+      {
+        "url": "https://randomuser.me/api/portraits/women/88.jpg",
+        "isMain": true,
+        "description": "Qui ipsum ex non commodo duis."
+      }
+    ]
+  },
+  {
+    "FirstName": "Liza",
+    "LastName": "Abbott",
+    "Username": "Liza_Abbott",
+    "Email": "noemimurphy@centregy.com",
+    "DateOfBirth": "1956-05-02",
+    "Password": "password",
+    "Created": "2017-04-28",
+    "LastActive": "2017-04-28",
+    "Country": "Pakistan",
+    "Photos": [
+      {
+        "url": "https://randomuser.me/api/portraits/women/80.jpg",
+        "isMain": true,
+        "description": "Tempor sit duis aliquip pariatur."
+      }
+    ]
+  },
+  {
+    "FirstName": "Tessa",
+    "LastName": "Bernard",
+    "Username": "Tessa_Bernard",
+    "Email": "daniellewallace@talae.com",
+    "DateOfBirth": "1951-09-12",
+    "Password": "password",
+    "Created": "2017-05-27",
+    "LastActive": "2017-05-27",
+    "Country": "Austria",
+    "Photos": [
+      {
+        "url": "https://randomuser.me/api/portraits/women/40.jpg",
+        "isMain": true,
+        "description": "Enim id reprehenderit officia esse."
+      }
+    ]
+  },
+  {
+    "FirstName": "Annabelle",
+    "LastName": "Schmidt",
+    "Username": "Annabelle_Schmidt",
+    "Email": "justicemccray@escenta.com",
+    "DateOfBirth": "1966-01-02",
+    "Password": "password",
+    "Created": "2017-04-01",
+    "LastActive": "2017-04-01",
+    "Country": "Estonia",
+    "Photos": [
+      {
+        "url": "https://randomuser.me/api/portraits/women/77.jpg",
+        "isMain": true,
+        "description": "Veniam duis eu et nulla qui voluptate eiusmod adipisicing."
+      }
+    ]
+  },
+  {
+    "FirstName": "Joanne",
+    "LastName": "Sanders",
+    "Username": "Joanne_Sanders",
+    "Email": "lilianpowell@combogen.com",
+    "DateOfBirth": "1959-11-20",
+    "Password": "password",
+    "Created": "2017-03-30",
+    "LastActive": "2017-03-30",
+    "Country": "Venezuela",
+    "Photos": [
+      {
+        "url": "https://randomuser.me/api/portraits/women/9.jpg",
+        "isMain": true,
+        "description": "Dolor laborum irure fugiat culpa in velit ullamco."
+      }
+    ]
+  }
+]
