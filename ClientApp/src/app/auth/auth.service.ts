@@ -6,11 +6,12 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
     authChange = new Subject<boolean>();
-    base_url = 'https://localhost:44389/auth/';
+    base_url = environment.apiUrl + 'auth/';
 
     jwtHelper = new JwtHelperService();
     decodedToken: any;
@@ -19,7 +20,7 @@ export class AuthService {
 
 
     login(model: any) {
-        this.http.post(this.base_url + 'login', model).pipe(
+        this.http.post(this.base_url + 'login/', model).pipe(
             map((response: any) => {
                 const user = response;
                 if (user) {
@@ -38,6 +39,7 @@ export class AuthService {
 
                 this.authOk();
             }, error => {
+                console.log(error);
                 this.snack.open('Failure login', error, {duration: 4000});
         });
 
@@ -65,7 +67,10 @@ export class AuthService {
         });
     }
 
-
+    private authOk() {
+        this.authChange.next(true);
+        this.router.navigate(['/products']);
+    }
 
 
 // Linda tutorial auth function
@@ -105,8 +110,5 @@ export class AuthService {
     //     return this.user != null;
     // }
 
-    private authOk() {
-        this.authChange.next(true);
-        this.router.navigate(['/products']);
-    }
+
 }
