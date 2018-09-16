@@ -8,10 +8,13 @@ import { AuthGuard } from './auth/auth.guard';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './_resolvers/user.resolver';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
+import { EditUserResolver } from './_resolvers/edit-user.resolver';
 
 
 const routes: Routes = [
     { path: '', component: WelcomeComponent}, // empty part is the root route
+    { path: 'user/edit', component: EditUserComponent, resolve: {user: EditUserResolver}},
     { path: 'users', component: UserListComponent},
     // the resolver allows to load the data before routed to a route
     { path: 'user/:userName', component: UserComponent, resolve: {user: UserResolver}},

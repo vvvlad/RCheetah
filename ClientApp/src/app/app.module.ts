@@ -26,6 +26,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './_resolvers/user.resolver';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
+import { EditUserResolver } from './_resolvers/edit-user.resolver';
 
 
 // this is for sending the jwt with every request
@@ -48,6 +50,7 @@ export function tokenGetter() {
     AllProductsComponent,
     UserListComponent,
     UserComponent,
+    EditUserComponent,
   ],
   imports: [
     MaterialModule,
@@ -68,7 +71,7 @@ export function tokenGetter() {
   ],
   exports: [
   ],
-  providers: [AuthService, ProductsService, ErrorInterceptorProvider, UserService, UserResolver],
+  providers: [AuthService, ProductsService, ErrorInterceptorProvider, UserService, UserResolver, EditUserResolver],
   bootstrap: [AppComponent],
   entryComponents: [AddProductDialogComponent]
 })
