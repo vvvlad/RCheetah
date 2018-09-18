@@ -4,17 +4,18 @@ import {WelcomeComponent} from './welcome/welcome.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ProductsComponent } from './products/products.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './_guards/auth.guard';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './_resolvers/user.resolver';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { EditUserResolver } from './_resolvers/edit-user.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 
 const routes: Routes = [
     { path: '', component: WelcomeComponent}, // empty part is the root route
-    { path: 'user/edit', component: EditUserComponent, resolve: {user: EditUserResolver}},
+    { path: 'user/edit', component: EditUserComponent, resolve: {user: EditUserResolver}, canDeactivate: [PreventUnsavedChanges]},
     { path: 'users', component: UserListComponent},
     // the resolver allows to load the data before routed to a route
     { path: 'user/:userName', component: UserComponent, resolve: {user: UserResolver}},

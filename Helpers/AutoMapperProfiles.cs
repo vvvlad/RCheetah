@@ -27,6 +27,8 @@ namespace RCheetah.Helpers
             {
                 opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
             });
+
+            CreateMap<UserForUpdateDto, User>();
         }
     }
 }

@@ -1,2 +1,47 @@
-<p>
-{{user.firstName}}</p>
+<mat-card class="user-card">
+  <mat-card-header>
+    <img mat-card-avatar src="{{user.photoUrl}}" class="user-header-image">
+    <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
+    <mat-card-subtitle>{{user.country}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{user.photoUrl}}" alt="{{user.firstName}} photo">
+  <mat-card-content>
+    <form fxLayout="column" 
+      fxLayoutAlign="center center"
+      fxLayoutGap ="10px"
+      [formGroup]="updateForm"
+      (ngSubmit)="updateUser()">
+      <mat-form-field>
+          <input 
+            type="firstName" 
+            matInput 
+            placeholder="First Name" 
+            formControlName="firstName">           
+            <mat-error>First name can't be empty</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input 
+            type="lastName" 
+            matInput 
+            placeholder="Last Name"
+            formControlName="lastName"
+            >
+            <mat-error>Last name can't be empty</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+              type="country" 
+              matInput 
+              placeholder="Country"
+              formControlName="country"
+              >
+              <mat-error>Country name can't be empty</mat-error>
+          </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!updateForm.dirty || !updateForm.valid" >Submit</button>
+    
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+   
+  </mat-card-actions>
+</mat-card>

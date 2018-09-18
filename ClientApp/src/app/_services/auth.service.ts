@@ -1,4 +1,4 @@
-import { AuthData, Token } from './auth-data.model';
+import { AuthData, Token } from '../auth/auth-data.model';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -46,5 +47,24 @@ namespace RCheetah.Controllers
             return NotFound();
 
         }
+
+        [HttpPut("{userName}")]
+        public async Task<IActionResult> UpdateUser(string userName, UserForUpdateDto userForUpdateDto)
+        {
+            //I defined 3 claims in auth controller
+            if (userName != User.FindFirst(ClaimTypes.Name).Value)
+            {
+                return Unauthorized();
+            }
+
+            var userFromRepo = await _repo.GetUser(userName);
+            _mapper.Map(userForUpdateDto, userFromRepo);
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user {userName} failed on save");
+
+        }
+
     }
 }

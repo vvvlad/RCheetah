@@ -15,8 +15,8 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddProductDialogComponent } from './products/add-product/add-product-dialog.component';
-import { AuthService } from './auth/auth.service';
-import { ProductsService } from './products/products.service';
+import { AuthService } from './_services/auth.service';
+import { ProductsService } from './_services/products.service';
 import { AllProductsComponent } from './products/all-products/all-products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptorProvider } from './_services/error-interceptor.service';
@@ -28,6 +28,8 @@ import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './_resolvers/user.resolver';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { EditUserResolver } from './_resolvers/edit-user.resolver';
+import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 
 // this is for sending the jwt with every request
@@ -71,7 +73,15 @@ export function tokenGetter() {
   ],
   exports: [
   ],
-  providers: [AuthService, ProductsService, ErrorInterceptorProvider, UserService, UserResolver, EditUserResolver],
+  providers: [
+    AuthService,
+    ProductsService,
+    ErrorInterceptorProvider,
+    UserService,
+    UserResolver,
+    EditUserResolver,
+    AuthGuard,
+    PreventUnsavedChanges],
   bootstrap: [AppComponent],
   entryComponents: [AddProductDialogComponent]
 })
