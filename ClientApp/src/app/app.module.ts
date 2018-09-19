@@ -30,6 +30,7 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { EditUserResolver } from './_resolvers/edit-user.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 // this is for sending the jwt with every request
@@ -53,6 +54,7 @@ export function tokenGetter() {
     UserListComponent,
     UserComponent,
     EditUserComponent,
+    RegisterComponent,
   ],
   imports: [
     MaterialModule,

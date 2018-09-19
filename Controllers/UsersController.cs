@@ -34,7 +34,7 @@ namespace RCheetah.Controllers
             return Ok(usersToReturn);
         }
 
-        [HttpGet("{userName}")]
+        [HttpGet("{userName}", Name ="GetUser")]
         public async Task<IActionResult> GetUser (string userName)
         {
             var user = await _repo.GetUser(userName);

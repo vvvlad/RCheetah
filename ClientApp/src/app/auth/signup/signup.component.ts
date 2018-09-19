@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.authService.register({email: form.value.email, password: form.value.password});
+    // this.authService.register({email: form.value.email, password: form.value.password});
     // console.log(form);
   }
 

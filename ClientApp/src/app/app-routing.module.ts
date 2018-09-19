@@ -11,6 +11,7 @@ import { UserResolver } from './_resolvers/user.resolver';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { EditUserResolver } from './_resolvers/edit-user.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
     { path: 'users', component: UserListComponent},
     // the resolver allows to load the data before routed to a route
     { path: 'user/:userName', component: UserComponent, resolve: {user: UserResolver}},
-    { path: 'signup', component: SignupComponent},
+    { path: 'signup', component: SignupComponent}, // will remove this when done with RegisterComponent
+    { path: 'register', component: RegisterComponent},
     { path: 'login', component: LoginComponent},
     // { path: 'testcore', component: WebapitestComponent, canActivate: [AuthGuard]},
     { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]}, // return this to enable the guard on products routing

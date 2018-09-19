@@ -29,6 +29,7 @@ namespace RCheetah.Helpers
             });
 
             CreateMap<UserForUpdateDto, User>();
+            CreateMap<UserForRegisterDto, User>();
         }
     }
 }

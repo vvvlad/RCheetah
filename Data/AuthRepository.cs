@@ -68,7 +68,14 @@ namespace RCheetah.Data
             }
         }
 
-        public async Task<bool> UserExists(string email)
+        public async Task<bool> UserNameExists(string userName)
+        {
+            if (await _context.Users.AnyAsync(x => x.UserName == userName))
+                return true;
+            return false;
+        }
+
+        public async Task<bool> UserEmailExists(string email)
         {
             if (await _context.Users.AnyAsync(x => x.Email == email))
                 return true;

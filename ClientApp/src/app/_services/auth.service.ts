@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
+import { User } from '../_models/user';
 
 @Injectable()
 export class AuthService {
@@ -56,14 +57,17 @@ export class AuthService {
         this.router.navigate(['/login']);
     }
 
-    register(model: any) {
-        this.http.post<Token>(this.base_url + 'register', model).subscribe(
+    register(user: User) {
+        this.http.post<Token>(this.base_url + 'register', user).subscribe(
             next => {
-                console.log('register in OK');
-
+                // console.log('register in OK');
+                this.snack.open('Success', 'User was Registered', {duration: 4000, panelClass: ['snack-bar-color-ok']});
                 this.authOk();
             }, error => {
-                console.log('register to login ' + error);
+                this.snack.open('Failure', 'User Register failed', {duration: 4000});
+                // console.log('register to login ' + error);
+        }, () => {
+            this.login(user);
         });
     }
 

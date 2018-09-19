@@ -44,6 +44,8 @@ namespace RCheetah
 
             services.AddTransient<Seed>();
             services.AddAutoMapper();
+            //AddScoped means instance for each request
+            services.AddScoped<LogUserActivity>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

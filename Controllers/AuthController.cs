@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -20,11 +21,13 @@ namespace RCheetah.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
+        private readonly IMapper _mapper;
         private readonly IConfiguration _config;
 
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        public AuthController(IAuthRepository repo, IMapper mapper, IConfiguration config)
         {
             _repo = repo;
+            _mapper = mapper;
             _config = config;
         }
 
@@ -34,18 +37,24 @@ namespace RCheetah.Controllers
             //TODO validate request 
 
             user.Email = user.Email.ToLower();
-            if(await _repo.UserExists(user.Email))
+            if(await _repo.UserEmailExists(user.Email))
             {
                 return BadRequest("Email already exists");
             }
 
-            var userToCreate = new User
+            user.UserName = user.UserName.ToLower();
+            if (await _repo.UserNameExists(user.UserName))
             {
-                Email = user.Email
-            };
+                return BadRequest("User Name already exists");
+            }
+
+
+            var userToCreate = _mapper.Map<User>(user);
 
             var createdUser = await _repo.Register(userToCreate, user.Password);
-            return StatusCode(201);
+
+            var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
+            return CreatedAtRoute("GetUser", new { controller = "Users", userName = createdUser.UserName }, userToReturn);
 
         }
 
