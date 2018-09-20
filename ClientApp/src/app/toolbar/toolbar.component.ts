@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -23,6 +23,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.authSubscription = this.authService.authChange.subscribe(authStatus => {
       this.isAuth = authStatus;
     });
+    if (this.authService.loggedIn()) {
+      this.isAuth = true;
+    }
   }
   onLogout() {
     this.authService.logout();

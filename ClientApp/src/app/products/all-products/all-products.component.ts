@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { ProductsService } from '../products.service';
+import { ProductsService } from '../../_services/products.service';
 import { Product } from '../products.model';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
@@ -9,7 +9,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
   styleUrls: ['./all-products.component.css']
 })
 export class AllProductsComponent implements OnInit, AfterViewInit {
-  
+
   products: Product[] = [];
   displayedColumns = ['asin', 'title', 'price', 'BSR' ];
   dataSource = new MatTableDataSource<Product>();

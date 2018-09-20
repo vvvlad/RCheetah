@@ -5,8 +5,6 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { ExampleTableComponent } from './examples/example-table/example-table.component';
-import { ExampleDashboardComponent } from './examples/example-dashboard/example-dashboard.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { MaterialModule } from './material.module';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -17,19 +15,34 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddProductDialogComponent } from './products/add-product/add-product-dialog.component';
-import { AuthService } from './auth/auth.service';
-import { ProductsService } from './products/products.service';
+import { AuthService } from './_services/auth.service';
+import { ProductsService } from './_services/products.service';
 import { AllProductsComponent } from './products/all-products/all-products.component';
-import { WebapitestComponent } from './examples/webapitest/webapitest.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptorProvider } from './_services/error-interceptor.service';
+import { UserService } from './_services/user.service';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from '../environments/environment';
+import { UserComponent } from './user/user/user.component';
+import { UserResolver } from './_resolvers/user.resolver';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
+import { EditUserResolver } from './_resolvers/edit-user.resolver';
+import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { RegisterComponent } from './auth/register/register.component';
+
+
+// this is for sending the jwt with every request
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    ExampleTableComponent,
-    ExampleDashboardComponent,
     WelcomeComponent,
     SignupComponent,
     LoginComponent,
@@ -38,7 +51,10 @@ import { ErrorInterceptorProvider } from './_services/error-interceptor.service'
     ProductDetailsComponent,
     AddProductDialogComponent,
     AllProductsComponent,
-    WebapitestComponent
+    UserListComponent,
+    UserComponent,
+    EditUserComponent,
+    RegisterComponent,
   ],
   imports: [
     MaterialModule,
@@ -48,11 +64,26 @@ import { ErrorInterceptorProvider } from './_services/error-interceptor.service'
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: [environment.apiDomain],
+        blacklistedRoutes: [environment.apiDomain + '/auth']
+      }
+    })
   ],
   exports: [
   ],
-  providers: [AuthService, ProductsService, ErrorInterceptorProvider],
+  providers: [
+    AuthService,
+    ProductsService,
+    ErrorInterceptorProvider,
+    UserService,
+    UserResolver,
+    EditUserResolver,
+    AuthGuard,
+    PreventUnsavedChanges],
   bootstrap: [AppComponent],
   entryComponents: [AddProductDialogComponent]
 })

@@ -10,7 +10,8 @@ namespace RCheetah.Data
     {
         Task<User> Register(User user, string password);
         Task<User> Login(string email, string password);
-        Task<bool> UserExists(string email);
+        Task<bool> UserEmailExists(string email);
+        Task<bool> UserNameExists(string userName);
 
     }
 }

@@ -12,7 +12,18 @@ namespace RCheetah.Dtos
         [Required]
         public string Email { get; set; }
         [Required]
-        [StringLength(8, MinimumLength =6, ErrorMessage ="Password needs to be at least 6 characters")]
+        public string UserName { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 6, ErrorMessage ="Password needs to be at least 6 characters")]
         public string Password { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime LastActive { get; set; }
+
+        public UserForRegisterDto()
+        {
+            Created = DateTime.Now;
+            LastActive = DateTime.Now;
+        }
     }
 }

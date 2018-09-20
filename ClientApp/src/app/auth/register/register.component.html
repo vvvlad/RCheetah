@@ -1,0 +1,65 @@
+<section>
+  <form 
+    fxLayout="column" 
+    fxLayoutAlign="center center"
+    fxLayoutGap ="10px"
+    [formGroup]="registerForm" 
+    (ngSubmit)="register()"
+   >
+    <mat-form-field>
+      <input 
+        type="email" 
+        matInput required
+        placeholder="Email" 
+        formControlName="email">
+        <mat-hint>Please enter a valid email.</mat-hint>
+        <mat-error>Invalid email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input 
+        type="text" 
+        matInput  required
+        placeholder="User Name" 
+        formControlName="userName">
+        <mat-hint>Please enter your desired user name</mat-hint>
+        <mat-error>Invalid username</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input 
+        type="password" 
+        matInput  required
+        placeholder="Password"
+        formControlName="password"
+        >
+        <mat-hint>Please enter a valid password.</mat-hint>
+        <!-- <mat-error>Password is missing</mat-error> -->
+        <mat-error *ngIf="registerForm.get('password').invalid">{{ getPasswordErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input 
+        type="password" 
+        matInput  required
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+        >
+        <mat-hint>Confirm password.</mat-hint>
+        <!-- TODO - use the stachoverflow article to implement errorStateMatcher  -->
+        <!-- <mat-error *ngIf="registerForm.hasError('mismatch')">{{ getConfirmPasswordErrorMessage() }}</mat-error> -->
+    </mat-form-field>
+    <mat-checkbox 
+      name="agree"  required
+      type="checkbox"
+      formControlName="agreeToTerms" 
+      required color="primary"
+      >
+      Agree to Terms and Conditions.
+    </mat-checkbox>
+    <button type="submit" mat-raised-button color="primary" [disabled]="registerForm.invalid" >Register</button>
+  </form>
+</section>
+
+<p>{{registerForm.value | json}}</p>
+<p>{{registerForm.valid | json}}</p>
+
+<p>{{registerForm.hasError('mismatch') | json}}</p>
+<p>{{registerForm.hasError() | json}}</p>

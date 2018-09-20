@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -32,6 +33,7 @@ namespace RCheetah
             //services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase()); this was an example where I used the in memory db
             services.AddDbContext<DataContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors(options => options.AddPolicy(
                 "Cors", 
@@ -40,6 +42,10 @@ namespace RCheetah
                     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();                    
                 }));
 
+            services.AddTransient<Seed>();
+            services.AddAutoMapper();
+            //AddScoped means instance for each request
+            services.AddScoped<LogUserActivity>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -82,7 +88,7 @@ namespace RCheetah
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -113,6 +119,8 @@ namespace RCheetah
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            //seeder.SeedUsers();
 
             app.UseCors("Cors");
             //This allows the app to have [Authorize] attribute and know how to authorize 

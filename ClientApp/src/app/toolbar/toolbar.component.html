@@ -5,7 +5,7 @@
     <mat-nav-list (click)="drawer.toggle()">
       <a mat-list-item routerLink="/"><mat-icon class="icon-menu">home</mat-icon>Default</a>
       <a mat-list-item routerLink="products"><mat-icon class="icon-menu">devices_other</mat-icon>Products</a>
-      <a mat-list-item routerLink="table"><mat-icon class="icon-menu">favorite</mat-icon>Example Table</a>
+      <a mat-list-item routerLink="users"><mat-icon class="icon-menu">favorite</mat-icon>Example Table</a>
       <a mat-list-item routerLink="testcore"><mat-icon class="icon-menu">ball</mat-icon>Test Core</a>
       
     </mat-nav-list>
@@ -28,9 +28,9 @@
           </li>
           /
           <li>
-            <a routerLink="/signup">
+            <a routerLink="/register">
               <!-- <mat-icon class="icon-menu">face</mat-icon> -->
-              <span>Signup</span>
+              <span>Register</span>
             </a>
           </li>
         </ul>
@@ -47,9 +47,9 @@
                 </button>
 
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
+                  <button mat-menu-item  >
                     <mat-icon>person</mat-icon>
-                    <span>Edit Profile</span>
+                    <span [routerLink]="['user/edit']">Edit Profile</span>
                   </button>
                   <button mat-menu-item (click)="onLogout()">
                     <mat-icon>power_settings_new</mat-icon>
