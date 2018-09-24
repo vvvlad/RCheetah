@@ -27,36 +27,36 @@ export class UserListComponent implements OnInit {
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.userService.getUsers();
-        }),
-        map((data: User[]) => {
-          // Flip flag to show that loading has finished.
-          this.isLoadingResults = false;
-          this.isRateLimitReached = false;
-          this.resultsLength = data.length;
+    // merge(this.sort.sortChange, this.paginator.page)
+    //   .pipe(
+    //     startWith({}),
+    //     switchMap(() => {
+    //       this.isLoadingResults = true;
+    //       return this.userService.getUsers();
+    //     }),
+    //     map((data: User[]) => {
+    //       // Flip flag to show that loading has finished.
+    //       this.isLoadingResults = false;
+    //       this.isRateLimitReached = false;
+    //       this.resultsLength = data.length;
 
-          return data;
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
-          this.isRateLimitReached = true;
-          return observableOf([]);
-        })
-      ).subscribe(data => this.users = data);
+    //       return data;
+    //     }),
+    //     catchError(() => {
+    //       this.isLoadingResults = false;
+    //       // Catch if the GitHub API has reached its rate limit. Return empty data.
+    //       this.isRateLimitReached = true;
+    //       return observableOf([]);
+    //     })
+    //   ).subscribe(data => this.users = data);
   }
 
   loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-    }, error => {
-      console.log(error);
-      this.snack.open('User list error', error, {duration: 4000});
-    });
+    // this.userService.getUsers().subscribe((users: User[]) => {
+    //   this.users = users;
+    // }, error => {
+    //   console.log(error);
+    //   this.snack.open('User list error', error, {duration: 4000});
+    // });
   }
 }
