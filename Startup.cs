@@ -30,8 +30,9 @@ namespace RCheetah
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase()); this was an example where I used the in memory db
-            services.AddDbContext<DataContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); //using sql
+
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -40,6 +41,47 @@ namespace RCheetah
                 builder => 
                 {
                     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();                    
+                }));
+
+            services.AddTransient<Seed>();
+            services.AddAutoMapper();
+            //AddScoped means instance for each request
+            services.AddScoped<LogUserActivity>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateAudience = false,
+                        ValidateIssuer = false
+                    };
+                });
+
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+        }
+
+        //This is the alternative to ConfigureService for development, and uses SQLite DB
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            //services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase()); this was an example where I used the in memory db
+            services.AddDbContext<DataContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("SqliteConnection"))); //Using SQLite
+
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(options => options.AddPolicy(
+                "Cors",
+                builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 }));
 
             services.AddTransient<Seed>();
@@ -81,10 +123,10 @@ namespace RCheetah
             //    };
             //});
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/dist";
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
